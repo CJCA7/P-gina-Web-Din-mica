@@ -1,0 +1,147 @@
+<!--Programa que captura datos introducidos en un formulario y los pasa a una tabla y al LocalStorage-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica_Dental_Citas</title>
+</head>
+<body>
+
+    <img src="imagen1.png" width="200"  height="75"/> <br> <br>
+
+    <form>
+        
+        <label>Fecha de la cita:</label><input type="date"  name="fechaCita"  id="fecha" size="50"> &nbsp &nbsp; 
+        <label>Hora de la cita:</label><input type="time"  name="HoraCita"  id="hora" size="50"> <br><br>
+        <label>DNI:</label><input type="text"  name="dni"  id="dni"
+        placeholder="Introducir nº DNI" size="12"> <br><br>
+        <label>Nombre:</label><input type="text"  name="nombrePaciente"  id="nombre"
+        placeholder="Introducir nombre del paciente" size="50"> <br><br>
+        <label>Apellidos:</label><input type="text"  name="apellidosPaciente"  id="apellidos"
+        placeholder="Introducir apellidos del paciente" size="50"> <br><br>
+        <label>Teléfono:</label><input type="number"  name="telefonoPaciente"  id="telefono"
+        placeholder="Introducir teléfono del paciente" size="50"> <br><br>
+        <label>Fecha de nacimiento:</label><input type="date"  name="fechaNacimientoPaciente"  id="nacido" size="50"> <br><br>
+        <label>Observaciones:</label><input type="text"  name="observaciones"  id="observaciones"
+        placeholder="Introducir observaciones" size="200"> <br><br>
+        <button type="button" onclick="capturar()">Grabar</button>
+        <input type="reset" name="borrado" id="barra"><br><br>
+
+    </form>
+ 
+    <h2> Tabla registro de citas:</h2>
+
+<table border="1" id="tabla" class="table">
+        <tr>
+            <td>Nombre</td>
+            <td>Apellidos</td>
+            <td>Fecha cita</td>
+            <td>Hora cita</td>
+            <td>DNI</td>
+            <td>Teléfono</td>
+            <td>Fecha nacimiento</td>
+            <td>Observaciones</td>
+        </tr>
+
+</table>
+
+    <script type="text/javascript">
+
+      //Ahora viene la función que captura los datos del formulario y los envia al LocalStorage
+      let listaCitas = [];
+      
+        function capturar(){
+           
+            let objetoCita={
+
+                cita:document.getElementById("fecha").value,
+                hora:document.getElementById("hora").value,
+                dni:document.getElementById("dni").value,
+                nombre:document.getElementById("nombre").value,
+                apellidos:document.getElementById("apellidos").value,
+                telefono:document.getElementById("telefono").value,
+                nacido:document.getElementById("nacido").value,
+                observaciones:document.getElementById("observaciones").value
+
+            }
+            console.log("${objetoCitas.nombre}");
+
+            //let listaCitas = [];
+            listaCitas.push(objetoCita);
+
+           // if(localStorage.listaCitas){
+           // listaCitas = JSON.parse(localStorage.listaCitas);
+          // }
+            
+            localStorage.setItem ("lista", JSON.stringify(listaCitas))
+
+        }
+
+        //Ahora viene la función que captura los datos del formulario y los envia a la tabla registro de citas
+
+        const enviar = () => {
+
+            const nuevaFila=document.createElement("tr")
+            const nombreRef= document.querySelector("#nombre").value
+            const nuevoTd=document.createElement("td")
+            const nuevoTexto=document.createTextNode(nombreRef)
+            nuevoTd.appendChild(nuevoTexto)
+            nuevaFila.appendChild(nuevoTd)
+
+            const apellidosRef= document.querySelector("#apellidos").value
+            const nuevoTd2=document.createElement("td")
+            const nuevoTexto2=document.createTextNode(apellidosRef)
+            nuevoTd2.appendChild(nuevoTexto2)
+            nuevaFila.appendChild(nuevoTd2)
+
+            const citaRef= document.querySelector("#fecha").value
+            const nuevoTd3=document.createElement("td")
+            const nuevoTexto3=document.createTextNode(citaRef)
+            nuevoTd3.appendChild(nuevoTexto3)
+            nuevaFila.appendChild(nuevoTd3)
+
+            const horaRef= document.querySelector("#hora").value
+            const nuevoTd4=document.createElement("td")
+            const nuevoTexto4=document.createTextNode(horaRef)
+            nuevoTd4.appendChild(nuevoTexto4)
+            nuevaFila.appendChild(nuevoTd4)
+
+            const dniRef= document.querySelector("#dni").value
+            const nuevoTd5=document.createElement("td")
+            const nuevoTexto5=document.createTextNode(dniRef)
+            nuevoTd5.appendChild(nuevoTexto5)
+            nuevaFila.appendChild(nuevoTd5)
+            
+            const telefRef= document.querySelector("#telefono").value
+            const nuevoTd6=document.createElement("td")
+            const nuevoTexto6=document.createTextNode(telefRef)
+            nuevoTd6.appendChild(nuevoTexto6)
+            nuevaFila.appendChild(nuevoTd6)
+
+            const bornRef= document.querySelector("#nacido").value
+            const nuevoTd7=document.createElement("td")
+            const nuevoTexto7=document.createTextNode(bornRef)
+            nuevoTd7.appendChild(nuevoTexto7)
+            nuevaFila.appendChild(nuevoTd7)
+
+            const obserRef= document.querySelector("#observaciones").value
+            const nuevoTd8=document.createElement("td")
+            const nuevoTexto8=document.createTextNode(obserRef)
+            nuevoTd8.appendChild(nuevoTexto8)
+            nuevaFila.appendChild(nuevoTd8)
+
+            const tablaRef=document.querySelector("#tabla")
+            tablaRef.appendChild(nuevaFila)
+
+
+        }
+
+            document.querySelector("button").addEventListener("click",enviar);
+
+    </script>
+
+
+</body>
+</html>
